@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TO DO LIST!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="vendors/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/style.css" />
+    <script src="vendors/angular.min.js"></script>
+    <script src="scripts/client.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+</head>
+<body>
+    
+    <div  ng-app="ToDoApp">
+            
+        <div class="container jumbotron" ng-controller="ToDoController as tc">
+                <h1 id="todolist">TO DO LIST!</h1>
+            <form ng-submit="tc.addTask()">
+                <input id="InputOne"  type="text" ng-model="tc.newTask.name" placeholder="Task Name"/>
+                <input class="submitbutton btn btn-block" type="submit" />
+            </form>
+            <div class="outputdiv" ng-repeat="task in tc.toDos | orderBy: 'completed'">
+                <p ng-class="{complete: task.completed}">{{task.name}}</p>
+                <button class="btn btn-success btn-block" ng-hide="task.completed" ng-click="tc.completeTask(task)">Complete</button>
+                <button class="btn btn-danger btn-block" ng-click="tc.deleteTask(task)">Delete</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
